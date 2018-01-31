@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-namespace tyler_std {
+namespace my_std {
 
 typedef uint8_t u8;
 typedef uint16_t u16;
@@ -45,7 +45,7 @@ static inline void assert(bool cond) {
 }
 
 template <typename T>
-//__attribute__((malloc)) // TODO: macro this?
+//__attribute__((malloc)) // TODO: macro this? // TODO: do this?
 static inline T *alloc(usize n) {
     void *result = ::malloc(n * sizeof(T));
     if (!result) {
@@ -71,6 +71,6 @@ static inline void free(T *ptr) {
 // Wrap those allocation functions up into something useful.
 // Some sort of static class probably.
 
-} // namespace tyler_std
+} // namespace my_std
 
 #endif

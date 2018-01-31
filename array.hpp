@@ -4,7 +4,7 @@
 
 #include "basic.hpp"
 
-namespace tyler_std {
+namespace my_std {
 
 template <typename T>
 struct Array {
@@ -80,6 +80,6 @@ struct Array {
  * custom allocators
  */
 
-} // namespace tyler_std
+} // namespace my_std
 
 #endif

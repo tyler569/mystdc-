@@ -4,7 +4,7 @@
 
 #include "basic.hpp"
 
-namespace tyler_std {
+namespace my_std {
 
 /* 
  * TODO:
@@ -22,6 +22,6 @@ struct Vector4 {
     f32 x, y, z, w;
 };
 
-} // namespace tyler_std
+} // namespace my_std
 
 #endif

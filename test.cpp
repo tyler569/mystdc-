@@ -1,28 +1,18 @@
 
 #include <stdio.h> // TODO: replace print
 #include "basic.hpp"
+#include "box.hpp"
 #include "array.hpp"
 
-using namespace tyler_std;
+using namespace my_std;
 
-// TODO generic print then generic prints for data structures
-void print_arr(Array<int> *arr) {
-    printf("Array { ");
-    for (usize i=0; i<arr->len - 1; i++) {
-        printf("%d, ", arr->at(i));
-    }
-    printf("%d }\n", arr->at(arr->len - 1));
-}
+/*void print_std(Box<int>& box) {
+    printf("Box { %i }\n", *box);
+}*/
 
-// Personal coding style questions:
-// Do I like references?
-//
-// They're implicit, which is bad,
-// but raw pointers also require weird shit like ->
-// everywhere.
-//
-// I might actually accept them.
-void print_arr(Array<int>& arr) {
+// TODO: Think about whether I like references or not.
+// They're clean, but they hide what is actually going on.
+void print_std(Array<int>& arr) {
     printf("Array { ");
     for (usize i=0; i<arr.len - 1; i++) {
         printf("%d, ", arr.at(i));
@@ -30,6 +20,7 @@ void print_arr(Array<int>& arr) {
     printf("%d }\n", arr.at(arr.len - 1));
 }
 
+// A thing we can do with dynamic arrays.
 int postfix_eval(const char *program) {
     Array<int> stack(1);
 
@@ -58,52 +49,71 @@ int postfix_eval(const char *program) {
         } else {
             // ignore
         }
-        // print_arr(stack);
+        // print_std(stack);
     }
     return stack.pop();
 }
 
 int main() {
-
     const int cnt = 3;
 
-    printf("max(1, 2) == %d\n", max(1, 2));
-
-    int *x = alloc<int>(cnt);
-    for (int i=0; i<cnt; i++) {
-        x[i] = i * 3;
-    }
-    for (int i=0; i<cnt; i++) {
-        printf("x[%i] == %i\n", i, x[i]);
+    { // max
+        printf("max(1, 2) == %d\n", max(1, 2));
     }
 
-    Array<int> a(100);
-
-    for (int i=0; i<cnt; i++) {
-        a.push(i * 27);
-    }
-    for (int i=0; i<cnt; i++) {
-        printf("a.at(%i) == %i\n", i, a.at(i));
-    }
-
-    for (auto i : a) {
-        printf("foreach %i is in a\n", i);
-    }
-    print_arr(&a);
-
-    printf("1 2 3 + * => %i\n", postfix_eval("1 2 3 + *"));
-    printf("1 2 3 * + => %i\n", postfix_eval("1 2 3 * +"));
-
-    Array<int> foo(1);
-    for (int i=0; i<100; i++) {
-        foo.push(i / 2);
+    { // raw alloc<T>();
+        int *x = alloc<int>(cnt);
+        for (int i=0; i<cnt; i++) {
+            x[i] = i * 3;
+        }
+        for (int i=0; i<cnt; i++) {
+            printf("x[%i] == %i\n", i, x[i]);
+        }
     }
 
-    auto bar = Array<int>(5);
-    bar.len = 5;
-    for (auto& b : bar) {
-        b = 10;
+    { // Array<T>
+        Array<int> a(100);
+        
+        // Create and push
+        for (int i=0; i<cnt; i++) {
+            a.push(i * 27);
+        }
+        // TODO: think about allowing operator[] accesses.
+        for (int i=0; i<cnt; i++) {
+            printf("a.at(%i) == %i\n", i, a.at(i));
+        }
+
+        // C++11 foreach-style loops
+        for (auto i : a) {
+            printf("foreach %i is in a\n", i);
+        }
+        print_std(a);
+
+        printf("1 2 3 + * => %i\n", postfix_eval("1 2 3 + *"));
+        printf("1 2 3 * + => %i\n", postfix_eval("1 2 3 * +"));
+
+        Array<int> foo(1);
+        for (int i=0; i<100; i++) {
+            foo.push(i / 2);
+        }
+
+        auto bar = Array<int>(5);
+        bar.len = 5;
+        for (auto& b : bar) {
+            b = 10;
+        }
+        print_std(bar);
     }
-    print_arr(bar);
+
+#if 0 // Box will probably be removed
+    {
+        auto c = Box<int>(10);
+        print_std(c);
+
+        auto d = Box<int[10]>();
+        d.data[6] = 100;
+        printf("%i\n", d.data[6]);
+    }
+#endif
 
 }

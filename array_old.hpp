@@ -4,7 +4,7 @@
 
 #include "basic.hpp"
 
-namespace tyler_std {
+namespace my_std {
 
 template <typename T>
 struct Array {
@@ -110,6 +110,6 @@ T *Array<T>::end() {
     return this->data + this->len;
 }
 
-} // namespace tyler_std
+} // namespace my_std
 
 #endif

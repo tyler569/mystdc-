@@ -4,12 +4,12 @@
 
 #include "basic.hpp"
 
-namespace tyler_std {
+namespace my_std {
 
 /* 
  * TODO
  */
 
-} // namespace tyler_std
+} // namespace my_std
 
 #endif
