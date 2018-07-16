@@ -20,6 +20,22 @@ void print_std(Array<int>& arr) {
     printf("%d }\n", arr.at(arr.len - 1));
 }
 
+void print_std(Box<int>& box) {
+    printf("Box { ");
+    printf("%i", *box);
+    printf(" }\n");
+}
+
+void print_std(Box<int[10]>& box) {
+    printf("Box { ");
+    for (int i=0; i<10; i++) {
+        printf("%i", (*box)[i]);
+        if (i != 9)
+            printf(", ");
+    }
+    printf(" }\n");
+}
+
 // A thing we can do with dynamic arrays.
 int postfix_eval(const char *program) {
     Array<int> stack(1);
@@ -69,6 +85,7 @@ int main() {
         for (int i=0; i<cnt; i++) {
             printf("x[%i] == %i\n", i, x[i]);
         }
+        free(x);
     }
 
     { // Array<T>
@@ -105,15 +122,16 @@ int main() {
         print_std(bar);
     }
 
-#if 0 // Box will probably be removed
     {
         auto c = Box<int>(10);
         print_std(c);
 
         auto d = Box<int[10]>();
-        d.data[6] = 100;
-        printf("%i\n", d.data[6]);
+        for (int i=0; i<10; i++) {
+            (*d)[i] = i;
+        }
+        (*d)[6] = 100;
+        printf("%i\n", (*d)[6]);
+        print_std(d);
     }
-#endif
-
 }

@@ -19,6 +19,14 @@ struct Box {
         *data = d;
     }
 
+    /* TODO: for initializer lists
+    template <size_t n>
+    Box(T d[]) {
+        data = alloc<T>(sizeof(T) * n);
+        memcpy(data, d);
+    }
+    */
+
     ~Box() {
         free(data);
     }
