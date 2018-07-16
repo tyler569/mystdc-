@@ -9,16 +9,16 @@ namespace my_std {
 template <typename T>
 struct Array {
     T *data;
-    usize len;
-    usize count;
+    size_t len;
+    size_t count;
 
-    Array(usize = 16);
+    Array(size_t = 16);
     ~Array();
-    T at(usize);
-    T *at_ptr(usize);
+    T at(size_t);
+    T *at_ptr(size_t);
     void push(T);
     T pop();
-    void set(usize, T);
+    void set(size_t, T);
     void print();
 
     // For foreach construct
@@ -31,7 +31,7 @@ struct Array {
  */
 
 template <typename T>
-Array<T>::Array(usize initial) {
+Array<T>::Array(size_t initial) {
     printf("Allocated array");
     this->count = initial;
     this->len = 0;
@@ -46,7 +46,7 @@ Array<T>::~Array() {
 }
 
 template <typename T>
-T Array<T>::at(usize n) {
+T Array<T>::at(size_t n) {
 #ifndef NDEBUG
     if (n >= this->len) {
         panic("Out-of-bounds access");
@@ -56,7 +56,7 @@ T Array<T>::at(usize n) {
 }
 
 template <typename T>
-T *Array<T>::at_ptr(usize n) {
+T *Array<T>::at_ptr(size_t n) {
 #ifndef NDEBUG
     if (n >= this->len) {
         panic("Out-of-bounds access");
@@ -82,7 +82,7 @@ T Array<T>::pop() {
 }
 
 template <typename T>
-void Array<T>::set(usize n, T value) {
+void Array<T>::set(size_t n, T value) {
 #ifndef NDEBUG
     if (n >= this->len) {
         panic("Out-of-bounds access");
@@ -94,7 +94,7 @@ void Array<T>::set(usize n, T value) {
 template <>
 void Array<int>::print() {
     printf("Array{ ");
-    for (usize i=0; i<this->len - 1; i++) {
+    for (size_t i=0; i<this->len - 1; i++) {
         printf("%d, ", this->at(i));
     }
     printf("%d }\n", this->at(this->len - 1));

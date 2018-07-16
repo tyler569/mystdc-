@@ -14,7 +14,7 @@ using namespace my_std;
 // They're clean, but they hide what is actually going on.
 void print_std(Array<int>& arr) {
     printf("Array { ");
-    for (usize i=0; i<arr.len - 1; i++) {
+    for (size_t i=0; i<arr.len - 1; i++) {
         printf("%d, ", arr.at(i));
     }
     printf("%d }\n", arr.at(arr.len - 1));

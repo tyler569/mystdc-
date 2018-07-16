@@ -9,10 +9,10 @@ namespace my_std {
 template <typename T>
 struct Array {
     T *data;
-    usize len;
-    usize count;
+    size_t len;
+    size_t count;
 
-    Array(usize initial = 16) {
+    Array(size_t initial = 16) {
         count = initial;
         len = 0;
         data = alloc<T>(initial);
@@ -22,7 +22,7 @@ struct Array {
         free(data);
     }
 
-    T at(usize n) {
+    T at(size_t n) {
 #ifndef NDEBUG
         if (n >= len) {
             panic("Out-of-bounds access");
@@ -31,7 +31,7 @@ struct Array {
         return data[n];
     }
 
-    T *at_ptr(usize n) {
+    T *at_ptr(size_t n) {
 #ifndef NDEBUG
         if (n >= len) {
             panic("Out-of-bounds access");
@@ -57,7 +57,7 @@ struct Array {
         return data[len];
     }
 
-    void set(usize n, T value) {
+    void set(size_t n, T value) {
 #ifndef NDEBUG
         if (n >= len) {
             panic("Out-of-bounds access");

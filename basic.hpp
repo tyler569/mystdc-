@@ -8,21 +8,6 @@
 
 namespace my_std {
 
-typedef uint8_t u8;
-typedef uint16_t u16;
-typedef uint32_t u32;
-typedef uint64_t u64;
-typedef size_t usize;
-
-typedef int8_t i8;
-typedef int16_t i16;
-typedef int32_t i32;
-typedef int64_t i64;
-typedef intmax_t isize;
-
-typedef float f32;
-typedef double f64;
-
 template <typename T>
 static inline T max(T a, T b) {
     return a > b ? a : b;
@@ -46,7 +31,7 @@ static inline void assert(bool cond) {
 
 template <typename T>
 //__attribute__((malloc)) // TODO: macro this? // TODO: do this?
-static inline T *alloc(usize n) {
+static inline T *alloc(size_t n) {
     void *result = ::malloc(n * sizeof(T));
     if (!result) {
         panic("Malloc failed! OOM?\n");
@@ -55,7 +40,7 @@ static inline T *alloc(usize n) {
 }
 
 template <typename T>
-static inline T *realloc(T *ptr, usize n) {
+static inline T *realloc(T *ptr, size_t n) {
     void *result = ::realloc((void *)ptr, n * sizeof(T));
     if (!result) {
         panic("Realloc failed! OOM?\n");
